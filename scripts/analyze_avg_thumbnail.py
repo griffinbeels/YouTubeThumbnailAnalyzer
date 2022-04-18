@@ -1,7 +1,7 @@
 '''
 Constructs the average thumbnail from a list of YouTuber thumbnails.
 '''
-import os, shutil, requests
+import os, shutil, requests, sys
 import numpy as np
 from PIL import Image
 import scrapetube
@@ -100,14 +100,13 @@ def average_thumbnail_basic(videos, outputdir, limit_choice, sort_choice):
 
 # Answers the question: What do the 10 most recent Mr Beast thumbnails look like averaged together?
 # TODO: input validation (too lazy right now!)
-channel_name = input("Enter the YouTube Channel name: ") or "MrBeast6000" # the name of the channel
-channel_url_choice = input("Enter the YouTube Channel URL: ") or "https://www.youtube.com/c/MrBeast6000" # the url of the channel
-sort_choice = input("Enter the sorting method: ") or "newest" # one of ["newest", "oldest", or "popular"]
+channel_name = sys.argv[1] # the name of the channel
+channel_url_choice = sys.argv[2] # the url of the channel
+sort_choice = sys.argv[3] # one of ["newest", "oldest", or "popular"]
+limit_choice = int(sys.argv[4]) # number of videos to analyze
 redownload = True # force a redownload of the thumbnails
-limit_choice = input("Enter the number of videos to average: ") or 10 # number of videos to analyze
-limit_choice = int(limit_choice)
-imdir = f"../thumbnails/{channel_name}" # where the thumbnails are
-outputdir = f"{imdir}/output/" # output results
+imdir = f"../thumbnails/{channel_name}/{sort_choice}" # where the thumbnails are
+outputdir = f"../thumbnails/{channel_name}/output/" # output results
 
 # Either scrape & download or load from a local directory of thumbnails
 if(redownload):
