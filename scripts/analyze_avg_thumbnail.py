@@ -98,13 +98,14 @@ def average_thumbnail_basic(videos, outputdir, limit_choice, sort_choice):
 
 ########################## DRIVER ###############################
 
-# Answers the question: What do the 10 most recent Mr Beast thumbnails look like?
-# channel_name = input("Enter the name of the channel to scrape: ")
-channel_name = "MrBeast6000" # the name of the channel
-channel_url_choice = "https://www.youtube.com/c/MrBeast6000" # the url of the channel
-sort_choice = "newest" # one of ["newest", "oldest", or "popular"]
+# Answers the question: What do the 10 most recent Mr Beast thumbnails look like averaged together?
+# TODO: input validation (too lazy right now!)
+channel_name = input("Enter the YouTube Channel name: ") or "MrBeast6000" # the name of the channel
+channel_url_choice = input("Enter the YouTube Channel URL: ") or "https://www.youtube.com/c/MrBeast6000" # the url of the channel
+sort_choice = input("Enter the sorting method: ") or "newest" # one of ["newest", "oldest", or "popular"]
 redownload = True # force a redownload of the thumbnails
-limit_choice = 5 # number of videos to analyze
+limit_choice = input("Enter the number of videos to average: ") or 10 # number of videos to analyze
+limit_choice = int(limit_choice)
 imdir = f"../thumbnails/{channel_name}" # where the thumbnails are
 outputdir = f"{imdir}/output/" # output results
 
